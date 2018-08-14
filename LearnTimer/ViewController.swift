@@ -29,33 +29,66 @@ class ViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     
-    var obj1 = Time_Calculation()
-    var obj2 = Time_Calculation()
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
      self.setupLayout()
-        
-    //  timeStart()
-        
-       timer1.text = obj1.updateTime(10, timer1)
-       timer2.text = obj2.updateTime(40, timer2)
-        
-        
-//timer
-    var timer = Timer()
-        
-    func timeStart(){
-            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(Time_Calculation.updateTime)), userInfo: nil, repeats: true)
-        
     
         
         
-    }
+    self.startTimer(timer1)
         
+    self.startTimer(timer2)
+        
+//
+    }
+    
+    var labelName : UILabel = UILabel()
+    
+    var timer = Timer()
+    
+    var time = 0
+    
+    func startTimer(_ label : UILabel){
+        
+        labelName = label
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action(){
+        
+        let label = labelName
+        
+        time += 1
+        
+        let  a = time % 60 //Seconds
+        var  b = time / 60 //Minutes
+        
+        if b > 59 {
+            b = 0
+        }
+        
+        //   timer1.text = "\(b)  :  \(a)"
+        
+        // print(a, b)
+        // colorChange(a: a, b: b)
+        
+        DispatchQueue.main.async {
+             label.text =  "\(b)  :  \(a)"
+        }
+       
+        
+        
+    }
+    
+   
+    
 func setupLayout(){
             
         let firstView = UIView()
@@ -93,70 +126,11 @@ func setupLayout(){
         }
     
 }
+
+
+    
+
     
     
-    
-class Time_Calculation{
-    var a = Int()
-    var b = Int()
-    
-    
-    
-    //Variable decleration
-    
-    var time = 0
-    
-    
-    
-    @objc func updateTime(_ sec: Int, _ lableName: UILabel) -> String {
-        
-        //    let label1 : UILabel = label
-//        var b : Int
-//        var a : Int
-        
-        var time = sec
-        let lable = lableName
-        
-        time += 1
-        
-        a = time % 60 //Seconds
-        b = time / 60 //Minutes
-        
-        if b > 59 {
-            b = 0
-        }
-        
-     //   timer1.text = "\(b)  :  \(a)"
-        
-        print(a, b)
-       // colorChange(a: a, b: b)
-        lable.text = "\(b)  :  \(a)"
-        let lblTxt = lable.text
-        
-        return lblTxt!
-        
-    }
-    
-    
-    
-    }
-    
-    //Color Change Function for the Vechniles in the queue
-    
-//    func colorChange(a:Int, b:Int) {
-//
-//        if (b>=2 && b<4) {
-//            timer1.backgroundColor = UIColor.blue
-//            timer2.backgroundColor = UIColor.blue
-//        }
-//
-//        else if b>=4 {
-//            timer1.backgroundColor = UIColor.red
-//            timer2.backgroundColor = UIColor.red
-//        }
-//    }
-    
-    
-    
-    
-}
+
+
