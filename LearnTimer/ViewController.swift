@@ -32,7 +32,8 @@ class ViewController: UIViewController {
     
     
     
-
+var obj1 = abc()
+var obj2 = abc()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,51 +42,13 @@ class ViewController: UIViewController {
     
         
         
-    self.startTimer(timer1)
+    obj1.startTimer(timer1)
         
-    self.startTimer(timer2)
+    obj2.startTimer(timer2)
         
 //
     }
-    
-    var labelName : UILabel = UILabel()
-    
-    var timer = Timer()
-    
-    var time = 0
-    
-    func startTimer(_ label : UILabel){
-        
-        labelName = label
-        
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.action), userInfo: nil, repeats: true)
-    }
-    
-    @objc func action(){
-        
-        let label = labelName
-        
-        time += 1
-        
-        let  a = time % 60 //Seconds
-        var  b = time / 60 //Minutes
-        
-        if b > 59 {
-            b = 0
-        }
-        
-        //   timer1.text = "\(b)  :  \(a)"
-        
-        // print(a, b)
-        // colorChange(a: a, b: b)
-        
-        DispatchQueue.main.async {
-             label.text =  "\(b)  :  \(a)"
-        }
-       
-        
-        
-    }
+ 
     
    
     
@@ -128,6 +91,47 @@ func setupLayout(){
 }
 
 
+class abc {
+    
+    var labelName : UILabel = UILabel()
+    
+    var timer = Timer()
+    
+    var time = 0
+    
+    func startTimer(_ label : UILabel){
+        
+        labelName = label
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(abc.action), userInfo: nil, repeats: true)
+    }
+    
+    @objc func action(){
+        
+        let label = labelName
+        
+        time += 1
+        
+        let  a = time % 60 //Seconds
+        var  b = time / 60 //Minutes
+        
+        if b > 59 {
+            b = 0
+        }
+        
+        //   timer1.text = "\(b)  :  \(a)"
+        
+        // print(a, b)
+        // colorChange(a: a, b: b)
+        
+        DispatchQueue.main.async {
+            label.text =  "\(b)  :  \(a)"
+        }
+        
+        
+        
+    }
+}
     
 
     
