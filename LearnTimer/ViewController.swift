@@ -42,9 +42,9 @@ var obj2 = abc()
     
         
         
-    obj1.startTimer(timer1)
+    obj1.startTimer(timer1, 15)
         
-    obj2.startTimer(timer2)
+    obj2.startTimer(timer2, 70)
         
 //
     }
@@ -99,9 +99,11 @@ class abc {
     
     var time = 0
     
-    func startTimer(_ label : UILabel){
+    func startTimer(_ label : UILabel, _ vechTime: Int){
         
         labelName = label
+        
+        time = vechTime
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(abc.action), userInfo: nil, repeats: true)
     }
